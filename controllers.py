@@ -1,12 +1,14 @@
-from services import InputService, parse_nodes
+from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles
 
 
 class AppController:
     def __init__(self):
-        self.input_service = InputService()
+        self.nodes = None
+        self.vehicles = None
 
-    def simulate(self, nodes_filepath):
-        print(nodes_filepath)
-        data = self.input_service.load_nodes_form_file(nodes_filepath)
-        print(data)
-        parse_nodes(data)
+    def simulate(self, nodes_file_path, vehicles_file_path):
+        self.load_data(nodes_file_path, vehicles_file_path)
+
+    def load_data(self, nodes_file_path, vehicles_file_path):
+        self.nodes = load_nodes(nodes_file_path)
+        self.vehicles = load_vehicles(vehicles_file_path)
