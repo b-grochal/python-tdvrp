@@ -12,9 +12,10 @@ class Link:
 
 
 class Vehicle:
-    def __init__(self, name, capacity):
+    def __init__(self, name, max_capacity):
         self.name = name
-        self.capacity = capacity
+        self.max_capacity = max_capacity
+        self.capacity = 0
         self.route = []
 
     def add_route_point(self, route_point):

@@ -29,7 +29,7 @@ def parse_links(links_json):
 def parse_vehicles(vehicles_json):
     vehicles = []
     for vehicle in vehicles_json["vehicles"]:
-        vehicles.append(Vehicle(vehicle["name"], vehicle["capacity"]))
+        vehicles.append(Vehicle(vehicle["name"], vehicle["max_capacity"]))
     return vehicles
 
 

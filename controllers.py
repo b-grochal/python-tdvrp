@@ -10,6 +10,7 @@ class AppController:
     def simulate(self, nodes_file_path, vehicles_file_path):
         self.load_data(nodes_file_path, vehicles_file_path)
         self.determine_routes_for_vehicles("Depot", 8)
+        print("END")
 
     def load_data(self, nodes_file_path, vehicles_file_path):
         self.nodes = load_nodes(nodes_file_path)
@@ -20,7 +21,7 @@ class AppController:
             current_time = starting_time
             route_point = self.find_route_point(starting_node, current_time)
             while route_point is not None:
-                if vehicle.capacity + route_point.cost > vehicle.capacity:
+                if vehicle.capacity + route_point.cost > vehicle.max_capacity:
                     break
                 vehicle.add_route_point(route_point)
                 current_time += route_point.cost
