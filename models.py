@@ -18,6 +18,7 @@ class Vehicle:
 
 
 class RoutePoint:
-    def __init__(self, node_name, time):
+    def __init__(self, node_name, time, cost):
         self.node_name = node_name
         self.time = time
+        self.cost = cost

@@ -10,10 +10,10 @@ def load_json_data_from_file(file_path):
 
 # Parser
 def parse_nodes(nodes_json):
-    nodes = []
+    nodes = {}
     for node in nodes_json["nodes"]:
         node_links = parse_links((node["links"]))
-        nodes.append(Node(node["name"], node_links))
+        nodes[node["name"]] = Node(node["name"], node_links)
     return nodes
 
 
