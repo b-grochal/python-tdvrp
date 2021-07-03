@@ -1,3 +1,4 @@
+from models import RoutePoint
 from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles
 
 
@@ -8,15 +9,34 @@ class AppController:
 
     def simulate(self, nodes_file_path, vehicles_file_path):
         self.load_data(nodes_file_path, vehicles_file_path)
+        self.determine_routes_for_vehicles("Depot", 8)
 
     def load_data(self, nodes_file_path, vehicles_file_path):
         self.nodes = load_nodes(nodes_file_path)
         self.vehicles = load_vehicles(vehicles_file_path)
 
-    # def determine_routes_for_vehicles(self):
-    #     for vehicle in self.vehicles:
-    #         route_point = None
-    #         while true:
-    #
-    # def find_route_point(self, current_node, time):
+    def determine_routes_for_vehicles(self, starting_node, starting_time):
+        for vehicle in self.vehicles:
+            current_time = starting_time
+            route_point = self.find_route_point(starting_node, current_time)
+            while route_point is not None:
+                if vehicle.capacity + route_point.cost > vehicle.capacity:
+                    break
+                vehicle.add_route_point(route_point)
+                current_time += route_point.cost
+                self.nodes[route_point.node_name].is_visited = True
+                route_point = self.find_route_point(route_point.node_name, current_time)
+
+    def find_route_point(self, current_node_name, time):
+        node = self.nodes[current_node_name]
+        route_points = []
+        for link in node.links:
+            if not self.nodes[link.target_node].is_visited:
+                route_points.append(RoutePoint(link.target_node, link.costs[time % 24], time))
+        if len(route_points) == 0:
+            return None
+        else:
+            route_points.sort(key=lambda x: x.cost, reverse=False)
+            return route_points[0]
+
 

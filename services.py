@@ -13,7 +13,7 @@ def parse_nodes(nodes_json):
     nodes = {}
     for node in nodes_json["nodes"]:
         node_links = parse_links((node["links"]))
-        nodes[node["name"]] = Node(node["name"], node_links)
+        nodes[node["name"]] = Node(node["name"], node_links, False)
     return nodes
 
 

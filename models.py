@@ -1,7 +1,8 @@
 class Node:
-    def __init__(self, name, links):
+    def __init__(self, name, links, is_visited):
         self.name = name
         self.links = links
+        self.is_visited = is_visited
 
 
 class Link:
@@ -16,9 +17,12 @@ class Vehicle:
         self.capacity = capacity
         self.route = []
 
+    def add_route_point(self, route_point):
+        self.route.append(route_point)
+
 
 class RoutePoint:
-    def __init__(self, node_name, time, cost):
+    def __init__(self, node_name, cost, time):
         self.node_name = node_name
-        self.time = time
         self.cost = cost
+        self.time = time
