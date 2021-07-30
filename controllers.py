@@ -27,6 +27,7 @@ class AppController:
                 current_time += route_point.cost
                 self.nodes[route_point.node_name].is_visited = True
                 route_point = self.find_route_point(route_point.node_name, current_time)
+            vehicle.add_route_point(RoutePoint("Depot", 0, current_time))
 
     def find_route_point(self, current_node_name, time):
         node = self.nodes[current_node_name]
