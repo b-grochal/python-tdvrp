@@ -2,15 +2,15 @@
   "vehicles": [
     {
       "name" : "First vehicle",
-      "max_capacity": 20
+      "max_capacity": 6
     },
     {
       "name" : "Second vehicle",
-      "max_capacity": 20
+      "max_capacity": 6
     },
     {
       "name" : "Third vehicle",
-      "max_capacity": 20
+      "max_capacity": 6
     }
   ]
 }

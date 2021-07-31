@@ -1,5 +1,5 @@
 from models import RoutePoint
-from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles
+from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles, show_routes
 
 
 class AppController:
@@ -10,6 +10,7 @@ class AppController:
     def simulate(self, nodes_file_path, vehicles_file_path):
         self.load_data(nodes_file_path, vehicles_file_path)
         self.determine_routes_for_vehicles("Depot", 8)
+        self.show_routes()
         print("END")
 
     def load_data(self, nodes_file_path, vehicles_file_path):
@@ -21,10 +22,10 @@ class AppController:
             current_time = starting_time
             route_point = self.find_route_point(starting_node, current_time)
             while route_point is not None:
-                if vehicle.capacity + route_point.cost > vehicle.max_capacity:
+                if vehicle.current_load + route_point.load > vehicle.max_capacity:
                     break
                 vehicle.add_route_point(route_point)
-                current_time += route_point.cost
+                current_time = route_point.time
                 self.nodes[route_point.node_name].is_visited = True
                 route_point = self.find_route_point(route_point.node_name, current_time)
             vehicle.add_route_point(RoutePoint("Depot", 0, current_time))
@@ -34,11 +35,12 @@ class AppController:
         route_points = []
         for link in node.links:
             if not self.nodes[link.target_node].is_visited:
-                route_points.append(RoutePoint(link.target_node, link.costs[time % 24], time))
+                route_points.append(RoutePoint(link.target_node, self.nodes[link.target_node].load, time + link.travel_time[time % 24]))
         if len(route_points) == 0:
             return None
         else:
-            route_points.sort(key=lambda x: x.cost, reverse=False)
+            route_points.sort(key=lambda x: x.load, reverse=False)
             return route_points[0]
 
-
+    def show_routes(self):
+        show_routes(self.vehicles)
