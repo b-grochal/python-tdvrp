@@ -13,7 +13,7 @@ def show_routes(vehicles):
     for vehicle in vehicles:
         print("Vehicle: {} - Max Capacity: {}".format(vehicle.name, vehicle.max_capacity))
         for route_point in vehicle.route:
-            print("Node: {} - Time: {} - Cost: {} - Vehicle load: {}/{}".format(route_point.node_name, route_point.time, route_point.load, route_point.vehicle_load, vehicle.max_capacity))
+            print("Node: {} - Time: {} - Cost: {} - Vehicle load: {}/{}".format(route_point.node_name, route_point.arrival_time, route_point.load, route_point.vehicle_load, vehicle.max_capacity))
         print("\n")
 
 

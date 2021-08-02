@@ -1,0 +1,16 @@
+{
+  "vehicles": [
+    {
+      "name" : "First vehicle",
+      "max_capacity": 4
+    },
+    {
+      "name" : "Second vehicle",
+      "max_capacity": 4
+    },
+    {
+      "name" : "Third vehicle",
+      "max_capacity": 4
+    }
+  ]
+}

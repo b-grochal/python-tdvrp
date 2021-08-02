@@ -19,6 +19,7 @@ class AppController:
         self.vehicles = load_vehicles(vehicles_file_path)
 
     def determine_routes_for_vehicles(self, starting_node, starting_time):
+        self.set_starting_node_as_visited(starting_node)
         for vehicle in self.vehicles:
             current_time = starting_time
             route_point = self.find_route_point(starting_node, current_time, vehicle.max_capacity - vehicle.current_load)
@@ -28,7 +29,7 @@ class AppController:
                 vehicle.current_load += route_point.load
                 route_point.vehicle_load = vehicle.current_load
                 vehicle.route.append(route_point)
-                current_time = route_point.time
+                current_time = route_point.arrival_time
                 self.nodes[route_point.node_name].is_visited = True
                 route_point = self.find_route_point(route_point.node_name, current_time, vehicle.max_capacity - vehicle.current_load)
             vehicle.route.append(RoutePoint("Depot", 0, current_time))
@@ -42,7 +43,7 @@ class AppController:
         if len(route_points) == 0:
             return None
 
-        route_points.sort(key=lambda x: x.load, reverse=False)
+        route_points.sort(key=lambda x: x.arrival_time, reverse=False)
         for route_point in route_points:
             if route_point.load <= available_vehicle_load:
                 return route_point
@@ -53,4 +54,7 @@ class AppController:
         show_routes(self.vehicles)
 
     def check_if_all_nodes_are_visited(self):
-        return any(node.is_visited for node in self.nodes.values())
+        return all(node.is_visited is True for node in self.nodes.values())
+
+    def set_starting_node_as_visited(self, starting_node):
+        self.nodes[starting_node].is_visited = True

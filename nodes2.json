@@ -2,6 +2,7 @@
   "nodes": [
     {
       "name": "Depot",
+      "load": 0,
       "links": [
         {
           "target_node": "A",
@@ -35,6 +36,7 @@
     },
     {
       "name": "A",
+      "load": 5,
       "links": [
         {
           "target_node": "B",
@@ -64,6 +66,7 @@
     },
     {
       "name": "B",
+      "load": 2,
       "links": [
         {
           "target_node": "A",
@@ -93,6 +96,7 @@
     },
     {
       "name": "C",
+      "load": 6,
       "links": [
         {
           "target_node": "A",
@@ -122,6 +126,7 @@
     },
     {
       "name": "D",
+      "load": 4,
       "links": [
         {
           "target_node": "A",
@@ -151,6 +156,7 @@
     },
     {
       "name": "E",
+      "load": 1,
       "links": [
         {
           "target_node": "A",
@@ -180,6 +186,7 @@
     },
     {
       "name": "F",
+      "load": 5,
       "links": [
         {
           "target_node": "A",
@@ -209,6 +216,7 @@
     },
     {
       "name": "G",
+      "load": 6,
       "links": [
         {
           "target_node": "A",

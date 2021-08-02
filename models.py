@@ -21,8 +21,8 @@ class Vehicle:
 
 
 class RoutePoint:
-    def __init__(self, node_name, load, time, vehicle_load=0):
+    def __init__(self, node_name, load, arrival_time, vehicle_load=0):
         self.node_name = node_name
         self.load = load
-        self.time = time
+        self.arrival_time = arrival_time
         self.vehicle_load = vehicle_load
