@@ -24,11 +24,13 @@ class AppController:
             while route_point is not None:
                 if vehicle.current_load + route_point.load > vehicle.max_capacity:
                     break
-                vehicle.add_route_point(route_point)
+                vehicle.current_load += route_point.load
+                route_point.vehicle_load = vehicle.current_load
+                vehicle.route.append(route_point)
                 current_time = route_point.time
                 self.nodes[route_point.node_name].is_visited = True
                 route_point = self.find_route_point(route_point.node_name, current_time, vehicle.max_capacity - vehicle.current_load)
-            vehicle.add_route_point(RoutePoint("Depot", 0, current_time))
+            vehicle.route.append(RoutePoint("Depot", 0, current_time))
 
     def find_route_point(self, current_node_name, time, available_vehicle_load):
         node = self.nodes[current_node_name]

@@ -19,11 +19,6 @@ class Vehicle:
         self.current_load = 0
         self.route = []
 
-    def add_route_point(self, route_point):
-        self.current_load += route_point.load
-        route_point.vehicle_load = self.current_load
-        self.route.append(route_point)
-
 
 class RoutePoint:
     def __init__(self, node_name, load, time, vehicle_load=0):
