@@ -11,6 +11,7 @@ class AppController:
         self.load_data(nodes_file_path, vehicles_file_path)
         self.determine_routes_for_vehicles("Depot", 8)
         self.show_routes()
+        print(self.check_if_all_nodes_are_visited())
         print("END")
 
     def load_data(self, nodes_file_path, vehicles_file_path):
@@ -50,3 +51,6 @@ class AppController:
 
     def show_routes(self):
         show_routes(self.vehicles)
+
+    def check_if_all_nodes_are_visited(self):
+        return any(node.is_visited for node in self.nodes.values())

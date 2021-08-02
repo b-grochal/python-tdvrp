@@ -17,6 +17,9 @@ def show_routes(vehicles):
         print("\n")
 
 
+def show_message(message):
+    print(message)
+
 # Parser
 def parse_nodes(nodes_json):
     nodes = {}
