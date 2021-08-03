@@ -1,5 +1,5 @@
 from models import RoutePoint
-from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles, show_routes
+from services import load_json_data_from_file, parse_nodes, load_nodes, load_vehicles, show_routes, show_message
 
 
 class AppController:
@@ -10,9 +10,11 @@ class AppController:
     def simulate(self, nodes_file_path, vehicles_file_path):
         self.load_data(nodes_file_path, vehicles_file_path)
         self.determine_routes_for_vehicles("Depot", 8)
+        if self.check_if_all_nodes_are_visited():
+            show_message("All routes has been visited!")
+        else:
+            show_message("Insufficient capacity!")
         self.show_routes()
-        print(self.check_if_all_nodes_are_visited())
-        print("END")
 
     def load_data(self, nodes_file_path, vehicles_file_path):
         self.nodes = load_nodes(nodes_file_path)
@@ -24,8 +26,6 @@ class AppController:
             current_time = starting_time
             route_point = self.find_route_point(starting_node, current_time, vehicle.max_capacity - vehicle.current_load)
             while route_point is not None:
-                if vehicle.current_load + route_point.load > vehicle.max_capacity:
-                    break
                 vehicle.current_load += route_point.load
                 route_point.vehicle_load = vehicle.current_load
                 vehicle.route.append(route_point)
