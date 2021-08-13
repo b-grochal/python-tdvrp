@@ -17,12 +17,12 @@ class Vehicle:
         self.name = name
         self.max_capacity = max_capacity
         self.current_load = 0
-        self.route = []
+        self.tour = []
 
 
-class RoutePoint:
-    def __init__(self, node_name, load, arrival_time, vehicle_load=0):
+class TourPoint:
+    def __init__(self, node_name, collected_load, arrival_time, vehicle_load=0):
         self.node_name = node_name
-        self.load = load
+        self.collected_load = collected_load
         self.arrival_time = arrival_time
         self.vehicle_load = vehicle_load

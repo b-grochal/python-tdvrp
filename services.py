@@ -12,8 +12,8 @@ def load_json_data_from_file(file_path):
 def show_routes(vehicles):
     for vehicle in vehicles:
         print("Vehicle: {} - Max Capacity: {}".format(vehicle.name, vehicle.max_capacity))
-        for route_point in vehicle.route:
-            print("Node: {} - Time: {} - Cost: {} - Vehicle load: {}/{}".format(route_point.node_name, route_point.arrival_time, route_point.load, route_point.vehicle_load, vehicle.max_capacity))
+        for tour_point in vehicle.tour:
+            print("Node: {} - Time: {} - Collected load: {} - Vehicle load: {}/{}".format(tour_point.node_name, tour_point.arrival_time, tour_point.collected_load, tour_point.vehicle_load, vehicle.max_capacity))
         print("\n")
 
 
@@ -56,7 +56,3 @@ def load_nodes(nodes_file_path):
 def load_vehicles(vehicles_file_path):
     json_data = load_json_data_from_file(vehicles_file_path)
     return parse_vehicles(json_data)
-
-
-def save_results(vehicles, results_file_path):
-    save_data_to_json_file(vehicles, results_file_path)
